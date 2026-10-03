@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Harley & Joker 💜 — Page 3</title>
+
+<style>
+body {
+    background: #0a0014;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+    text-align: center;
+    padding: 20px;
+    overflow-x: hidden;
+    cursor: none;
+}
+
+/* Custom cursor */
+#cursorHeart {
+    position: fixed;
+    pointer-events: none;
+    font-size: 28px;
+    color: #ff66cc;
+    z-index: 9999;
+}
+
+/* Neon title */
+.neon {
+    font-size: 40px;
+    color: #ff003c;
+    text-shadow: 0 0 10px #ff003c, 0 0 20px #ff003c, 0 0 40px #ff003c;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { text-shadow: 0 0 10px #ff003c; }
+    50% { text-shadow: 0 0 25px #ff003c; }
+    100% { text-shadow: 0 0 10px #ff003c; }
+}
+
+/* Video styling */
+video {
+    width: 90%;
+    max-width: 900px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px #ff003c;
+    margin-top: 30px;
+}
+
+/* Button */
+button {
+    background: #b38bff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: none;
+    transition: 0.3s;
+    margin-top: 40px;
+}
+button:hover {
+    background: #d1b3ff;
+}
+
+/* Falling hearts */
+.heart {
+    position: fixed;
+    top: -20px;
+    font-size: 25px;
+    color: #ff66cc;
+    animation: fall 4s linear forwards;
+}
+@keyframes fall {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursorHeart">💜</div>
+
+<script>
+document.addEventListener("mousemove", function(e) {
+    const cursor = document.getElementById("cursorHeart");
+    cursor.style.left = e.pageX + "px";
+    cursor.style.top = e.pageY + "px";
+});
+</script>
+
+<!-- Falling hearts animation -->
+<script>
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💜";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+}
+
+for (let i = 0; i < 30; i++) {
+    setTimeout(createHeart, i * 120);
+}
+</script>
+
+<h1 class="neon">Harley & Joker 💜</h1>
+
+<p style="font-size: 22px; color: #ff99c8; text-shadow: 0 0 8px #ff99c8;">
+Ace Chemicals Scene — Suicide Squad (2016)
+</p>
+
+<!-- VIDEO PLAYER -->
+<video controls>
+    <source src="HarleyJoker.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<button onclick="goBack()">⬅ Back to Page 2</button>
+
+<script>
+function goBack() {
+    window.location.href = "page2.html";
+}
+</script>
+
+</body>
+</html>
