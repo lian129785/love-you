@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Laura 💜</title>
+<title>Secret Entry 💜</title>
 
 <style>
 body {
@@ -10,64 +10,18 @@ body {
     color: white;
     font-family: 'Trebuchet MS', sans-serif;
     text-align: center;
-    padding: 40px;
-    overflow-x: hidden;
+    overflow: hidden;
     cursor: none;
 }
 
-/* Custom cursor */
 #cursorHeart {
     position: fixed;
     pointer-events: none;
-    font-size: 28px;
+    font-size: 30px;
     color: #ff66cc;
     z-index: 9999;
 }
 
-/* Fade-in text */
-h1, p {
-    animation: fadeIn 1.5s ease;
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Buttons */
-button {
-    background: #b38bff;
-    border: none;
-    padding: 15px 30px;
-    font-size: 20px;
-    border-radius: 10px;
-    cursor: none;
-    transition: 0.3s;
-}
-button:hover {
-    background: #d1b3ff;
-}
-
-/* Moving NO button */
-#noBtn {
-    position: relative;
-}
-
-/* Mute button */
-#muteBtn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: transparent;
-    border: none;
-    font-size: 30px;
-    cursor: none;
-    color: #b38bff;
-}
-#muteBtn:hover {
-    color: #d1b3ff;
-}
-
-/* Falling hearts */
 .heart {
     position: fixed;
     top: -20px;
@@ -76,93 +30,101 @@ button:hover {
     animation: fall 4s linear forwards;
 }
 @keyframes fall {
-    0% { transform: translateY(0); opacity: 1; }
+    0% { opacity: 1; }
     100% { transform: translateY(100vh); opacity: 0; }
 }
 
-audio { display: none; }
+h1 {
+    font-size: 42px;
+    margin-top: 70px;
+    color: #b38bff;
+    text-shadow: 0 0 20px #b38bff;
+}
+
+#hint {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #ff99c8;
+    text-shadow: 0 0 10px #ff99c8;
+}
+
+input {
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    font-size: 18px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+button {
+    margin-top: 20px;
+    background: #b38bff;
+    border: none;
+    padding: 10px 30px;
+    font-size: 20px;
+    border-radius: 40px;
+    cursor: none;
+    box-shadow: 0 0 20px #b38bff;
+    transition: 0.3s;
+}
+button:hover {
+    background: #d1b3ff;
+    box-shadow: 0 0 30px #d1b3ff;
+}
+
+#error {
+    margin-top: 15px;
+    color: #ff003c;
+    text-shadow: 0 0 15px #ff003c;
+    font-size: 18px;
+}
 </style>
 </head>
 <body>
 
-<!-- CUSTOM CURSOR -->
 <div id="cursorHeart">💜</div>
 
 <script>
-document.addEventListener("mousemove", function(e) {
-    const cursor = document.getElementById("cursorHeart");
-    cursor.style.left = e.pageX + "px";
-    cursor.style.top = e.pageY + "px";
+document.addEventListener("mousemove", e => {
+    const c = document.getElementById("cursorHeart");
+    c.style.left = e.pageX + "px";
+    c.style.top = e.pageY + "px";
 });
-</script>
 
-<!-- AUDIO PLAYER -->
-<audio id="bgMusic" src="HimI.mp3" loop></audio>
-
-<!-- MUTE BUTTON -->
-<button id="muteBtn">🔊</button>
-
-<script>
-let music = document.getElementById("bgMusic");
-music.volume = 0.15;
-let isMuted = false;
-
-// Start music on first click (browser requirement)
-document.addEventListener("click", () => {
-    music.play();
-}, { once: true });
-
-document.getElementById("muteBtn").onclick = function() {
-    if (!isMuted) {
-        music.muted = true;
-        this.innerText = "🔇";
-        isMuted = true;
-    } else {
-        music.muted = false;
-        this.innerText = "🔊";
-        isMuted = false;
-    }
-};
-
-// Falling hearts animation
 function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💜";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 4000);
+    const h = document.createElement("div");
+    h.classList.add("heart");
+    h.innerHTML = "💜";
+    h.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
 }
-
-for (let i = 0; i < 25; i++) {
-    setTimeout(createHeart, i * 150);
-}
+for (let i = 0; i < 40; i++) setTimeout(createHeart, i * 120);
 </script>
 
-<h1>Hey Laura 💜</h1>
-<p><i>la mia regina</i></p>
-<p>Someone wanted to make you smile today.</p>
+<h1>Secret Birthday Gate 💜</h1>
+<p>Only one person can enter this little universe.</p>
 
-<br><br>
+<div id="hint">
+Hint: How do I call you when you call me “Frumoaso”? 💜
+</div>
 
-<h2 style="color:#b38bff;">Mini Game 🎮</h2>
-<p>Be honest…</p>
-<h3 style="color:#d8c9ff;">Do you still love me?</h3>
+<input type="password" id="passInput" placeholder="Enter your secret key">
+<br>
+<button onclick="checkPass()">Enter 💜</button>
 
-<button onclick="step2()">YES 💜</button>
-<button id="noBtn" onclick="moveNo()">NO</button>
+<div id="error"></div>
 
 <script>
-function step2() {
-    window.location.href = "page2.html";
-}
-
-function moveNo() {
-    let btn = document.getElementById("noBtn");
-    btn.style.left = (Math.random() * 200 - 100) + "px";
-    btn.style.top = (Math.random() * 200 - 100) + "px";
-    btn.style.transform = "scale(0.7)";
-    btn.innerText = "YES 💜";
+function checkPass() {
+    const val = document.getElementById("passInput").value.trim().toLowerCase();
+    const err = document.getElementById("error");
+    if (val === "uratule") {
+        window.location.href = "page1.html";
+    } else {
+        err.textContent = "Nope… only Pisoiaș knows this. Try again 💜";
+    }
 }
 </script>
 

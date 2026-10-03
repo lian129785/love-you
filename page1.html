@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Laura 💜 — Level 2</title>
+<title>For Laura 💜 — Level 1</title>
 
 <style>
 body {
@@ -29,36 +29,41 @@ body {
     color: #ff66cc;
     animation: fall 4s linear forwards;
 }
+@keyframes fall {
+    0% { opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
 
 h1 {
-    font-size: 46px;
+    font-size: 48px;
     margin-top: 60px;
-    color: #ff003c;
-    text-shadow: 0 0 25px #ff003c;
+    color: #b38bff;
+    text-shadow: 0 0 20px #b38bff;
 }
 
-p {
+.sub {
     font-size: 24px;
-    color: #ff99c8;
-    text-shadow: 0 0 15px #ff99c8;
+    color: #d8c9ff;
+    text-shadow: 0 0 10px #d8c9ff;
 }
 
-#heartBtn {
-    margin-top: 50px;
-    font-size: 40px;
-    background: transparent;
+button {
+    background: #b38bff;
     border: none;
-    color: #ff66cc;
-    text-shadow: 0 0 20px #ff66cc;
+    padding: 15px 40px;
+    font-size: 22px;
+    border-radius: 50px;
     cursor: none;
     transition: 0.3s;
-    animation: pulse 2s infinite;
+    box-shadow: 0 0 20px #b38bff;
+}
+button:hover {
+    background: #d1b3ff;
+    box-shadow: 0 0 30px #d1b3ff;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+#noBtn {
+    position: relative;
 }
 
 #volumeBox {
@@ -67,6 +72,11 @@ p {
     right: 20px;
     color: #ff99c8;
     font-size: 18px;
+    text-shadow: 0 0 10px #ff99c8;
+}
+
+#volumeSlider {
+    width: 120px;
 }
 </style>
 </head>
@@ -106,32 +116,29 @@ music.volume = 0.5;
 slider.addEventListener("input", () => music.volume = slider.value);
 </script>
 
-<h1>Level 2 — The Sweet Challenge 💜</h1>
+<h1>Happy Birthday, Laura 💜</h1>
+<p class="sub">la mia regina</p>
+<p class="sub">Someone wanted to make you smile today.</p>
+<p class="sub">From your Stepbrother… your little chaos partner, Pisoiaș.</p>
 
-<p>
-If you're here, it means you chose me once already.<br>
-And that says something beautiful about you.
-</p>
+<br><br>
 
-<p>
-Sei la mia dolcezza, Pisoiaș.<br>
-Sei la mia piccola tempesta… e la mia pace.
-</p>
+<p class="sub" style="font-size: 26px;">Do you still love me?</p>
 
-<p style="margin-top: 20px; font-size: 26px;">
-Touch the heart if you choose me again 💜
-</p>
-
-<button id="heartBtn" onclick="nextLevel()">💜</button>
+<button onclick="yes()">YES 💜</button>
+<button id="noBtn" onclick="no()">NO</button>
 
 <script>
-function nextLevel() {
-    const btn = document.getElementById("heartBtn");
-    btn.innerText = "✨";
-    btn.style.fontSize = "50px";
-    btn.style.color = "#ff99dd";
+function yes() {
+    window.location.href = "page2.html";
+}
 
-    setTimeout(() => window.location.href = "page3.html", 800);
+function no() {
+    let btn = document.getElementById("noBtn");
+    btn.style.left = (Math.random() * 200 - 100) + "px";
+    btn.style.top = (Math.random() * 200 - 100) + "px";
+    btn.style.transform = "scale(0.7)";
+    btn.innerText = "YES 💜";
 }
 </script>
 

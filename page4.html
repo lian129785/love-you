@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Laura 💜 — Final Level</title>
+
+<style>
+body {
+    background: #0a0014;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    cursor: none;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+/* Cursor heart */
+#cursorHeart {
+    position: fixed;
+    pointer-events: none;
+    font-size: 32px;
+    color: #ff66cc;
+    z-index: 9999;
+}
+
+/* Falling hearts */
+.heart {
+    position: fixed;
+    top: -20px;
+    font-size: 28px;
+    color: #ff66cc;
+    animation: fall 5s linear forwards;
+}
+@keyframes fall {
+    0% { opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Final box */
+#finalBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    text-align: center;
+    animation: fadeIn 3s ease forwards;
+    opacity: 0;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Final text */
+#finalText {
+    font-size: 34px;
+    color: #ff99c8;
+    text-shadow: 0 0 20px #ff99c8;
+    line-height: 1.5;
+    animation: glow 4s infinite;
+}
+@keyframes glow {
+    0% { text-shadow: 0 0 15px #ff99c8; }
+    50% { text-shadow: 0 0 35px #ff99c8; }
+    100% { text-shadow: 0 0 15px #ff99c8; }
+}
+
+/* Restart button */
+#restartBtn {
+    margin-top: 40px;
+    background: #ff003c;
+    padding: 15px 40px;
+    font-size: 24px;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    text-shadow: 0 0 10px #ff003c;
+    box-shadow: 0 0 25px #ff003c;
+    cursor: none;
+    transition: 0.3s;
+    animation: fadeBtn 5s ease forwards;
+    opacity: 0;
+}
+@keyframes fadeBtn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+#restartBtn:hover {
+    background: #ff335f;
+    box-shadow: 0 0 35px #ff335f;
+}
+
+/* Volume box */
+#volumeBox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: #ff99c8;
+    font-size: 18px;
+    text-shadow: 0 0 10px #ff99c8;
+}
+
+#volumeSlider {
+    width: 120px;
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursorHeart">💜</div>
+
+<script>
+document.addEventListener("mousemove", e => {
+    const c = document.getElementById("cursorHeart");
+    c.style.left = e.pageX + "px";
+    c.style.top = e.pageY + "px";
+});
+
+/* Falling hearts */
+function createHeart() {
+    const h = document.createElement("div");
+    h.classList.add("heart");
+    h.innerHTML = "💜";
+    h.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 5000);
+}
+for (let i = 0; i < 60; i++) {
+    setTimeout(createHeart, i * 120);
+}
+</script>
+
+<!-- Music -->
+<audio id="bgMusic" src="HimI.mp3" loop autoplay></audio>
+
+<!-- Volume slider -->
+<div id="volumeBox">
+    Volume 💜<br>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+</div>
+
+<script>
+const music = document.getElementById("bgMusic");
+const slider = document.getElementById("volumeSlider");
+music.volume = 0.5;
+
+slider.addEventListener("input", () => {
+    music.volume = slider.value;
+});
+</script>
+
+<!-- Final message -->
+<div id="finalBox">
+    <div id="finalText">
+        Every level you passed…<br>
+        every choice you made…<br>
+        every “yes” you gave…<br><br>
+        says something beautiful about you, Pisoiaș.<br><br>
+        Sei la mia dolcezza.<br>
+        Sei la mia piccola tempesta… e la mia pace.<br><br>
+        Ti voglio bene, davvero.<br>
+        You drive me crazy—in the best way.<br><br>
+        Happy Birthday again, My Queen.<br>
+        You’re magic. You’re chaos. You’re home.
+    </div>
+
+    <button id="restartBtn" onclick="restart()">Play Again 💜</button>
+</div>
+
+<script>
+function restart() {
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
